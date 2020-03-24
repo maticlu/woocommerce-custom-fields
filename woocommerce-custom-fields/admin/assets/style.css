@@ -1,0 +1,122 @@
+/*** Main elements ***/
+
+.wcc-postbox-border {
+	border: 1px solid #ccd0d4;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+}
+
+.wccf-wrapper {
+	padding: 2em;
+	margin: 1em 0;
+	position: relative;
+}
+
+.wccf-field-remove {
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	right: 10px;
+	top: 20px;
+	background-color: #ccd0d4;
+	border-radius: 100%;
+}
+
+.wccf-field-remove:hover {
+	cursor: pointer;
+	opacity: 0.8;
+}
+
+.wccf-field-remove::after,
+.wccf-field-remove::before {
+	content: "";
+	display: block;
+	width: 80%;
+	height: 2px;
+	background-color: #fff;
+	position: absolute;
+	left: 10%;
+	top: 45%;
+}
+
+.wccf-field-remove::before {
+	transform: rotate(45deg);
+}
+
+.wccf-field-remove::after {
+	transform: rotate(-45deg);
+}
+
+.wccf-vertical-space {
+	margin: 1em 0;
+}
+
+.wccf-space-bottom {
+	margin-bottom: 1em;
+}
+
+.wccf-field-line {
+	margin: 2em 0;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.wccf-label,
+.wccf-input {
+	width: 50%;
+}
+
+.wccf-input {
+	padding-left: 5%;
+}
+
+.wccf-input input,
+.wccf-input textarea {
+	width: 100%;
+	padding: 0.25em 1em;
+}
+
+.wccf-input textarea {
+	min-height: 200px;
+}
+
+.wccf-label label {
+	font-weight: 700;
+	margin-bottom: 0.5em;
+	display: block;
+}
+
+.wccf-main-select {
+	font-weight: 700;
+}
+
+.wccf-message {
+	padding: 2em;
+}
+
+.wccf-input-block-outer-wrapper {
+	width: 50%;
+	padding-left: 5%;
+}
+
+.wccf-input-block {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	align-items: center;
+}
+
+.wccf-input-block + .wccf-input-block {
+	margin-top: 1em;
+}
+
+.wccf-input-block .wccf-input {
+	padding: 0;
+	width: auto;
+}
+
+/** OPTIONS PAGE **/
+
+.wccf-panels-wrapper {
+	margin: 1em 0;
+}
