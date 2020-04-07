@@ -1,14 +1,5 @@
 <?php
 
-function wccf_wc_option_group( $input_content ) {
-	$content  = '<div class="options_group">';
-	$content .= $input_content;
-	$content .= '</div>';
-
-	return $content;
-}
-
-
 function wccf_register_wc_fields() {
 	if ( ! isset( $_GET['post'] ) ) {
 		return false;

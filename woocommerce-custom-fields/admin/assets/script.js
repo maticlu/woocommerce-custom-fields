@@ -98,9 +98,9 @@
     ]
   };
 
-  var fieldCheckboxes = {
-    name: 'Checkboxes',
-    type: 'checkbox',
+  var fieldDropdown = {
+    name: 'Dropdown',
+    type: 'dropdown',
     fields: [
       {
         type: 'text',
@@ -128,11 +128,33 @@
     ]
   };
 
+  var fieldCheckboxes = {
+    name: 'Checkbox',
+    type: 'checkbox',
+    fields: [
+      {
+        type: 'text',
+        name: 'Title',
+        key: 'title',
+        value: '',
+        description: descriptions.title
+      },
+      {
+        type: 'text',
+        name: 'Key',
+        key: 'key',
+        value: '',
+        description: descriptions.key
+      }
+    ]
+  };
+
   var availableHtmlElements = {
     textbox: fieldText,
     textarea: fieldTextarea,
     radiobutton: fieldRadiobuttons,
-    checkbox: fieldCheckboxes
+    checkbox: fieldCheckboxes,
+    dropdown : fieldDropdown
   };
 
   // This is our main object, which rerenders evertytime we make a change.
@@ -410,8 +432,8 @@
     }
   };
 
+  wccfConditions();
   wccfFieldEvents();
-
   wccfReactiveForm.read();
 
   // Events
@@ -544,6 +566,24 @@
   // Capitalize string
   function capitalizeString( string ) {
     return string.charAt( 0 ).toUpperCase() + string.slice( 1 );
+  }
+
+  // Conditions
+  function wccfConditions(){
+    $(".wccf-select-category").select2({
+      ajax: {
+        url: ajaxurl,
+        dataType: 'json',
+        data: function (params) {
+          return {
+            q: params.term, // search term
+            action: 'wccf_search_category',
+            nonce:$("input[name='wccf_nonce']").val()
+          };
+        },
+        // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+      }
+    });
   }
 
 }( jQuery ) );

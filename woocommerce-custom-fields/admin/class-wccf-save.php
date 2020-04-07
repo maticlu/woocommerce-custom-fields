@@ -23,14 +23,14 @@ class WCCF_Save {
 	 *
 	 * @param integer $post_id Current post id.
 	 */
-	private function __construct( $post_id ) {
+	public function __construct( $post_id ) {
 		$this->post_id = $post_id;
 		$this->panels  = WCCF_Fields::get_fields();
 		$this->start();
 	}
 
 	/**
-	 * Loop through panels nad field grousp to get to fields. Then Call save_field.
+	 * Loop through panels and field grousp to get to fields. Then Call save_field.
 	 */
 	private function start() {
 		foreach ( $this->panels as $panel ) {

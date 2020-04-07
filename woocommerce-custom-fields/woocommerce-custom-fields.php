@@ -8,7 +8,7 @@
  * Author URI: https://evaqode.com
  * Text Domain: woocommerce-custom-fields
  *
- * @package WooCommerceCustomFields/Constants
+ * @package WooCommerceCustomFields
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -30,6 +30,7 @@ add_action(
 
 			/** General functions -> Helpers */
 			require_once 'admin/general-functions.php';
+			require_once 'admin/wccf-notices.php';
 
 			/** Register */
 			require_once 'admin/register-admin-assets.php';
@@ -37,6 +38,7 @@ add_action(
 			require_once 'admin/register-post-type.php';
 			require_once 'admin/admin-fields/register-meta-box.php';
 			require_once 'admin/admin-fields/product-data-tabs.php';
+			require_once 'admin/wccf-conditions.php';
 
 			/** Register fields on Woocommerce product page */
 			require_once 'admin/class-wccf-fields.php';

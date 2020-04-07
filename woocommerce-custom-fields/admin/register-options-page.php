@@ -74,7 +74,7 @@ function wccf_panels() {
 		}
 	} else {
 		?>
-	<div class="wccf_panels_wrapper">
+	<div class="wccf-panels-wrapper">
 	<input type="text" name="' . WCCF_PANELS . '[]" class="wccf_panels" value=""/>
 	</div>
 		<?php

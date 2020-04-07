@@ -28,13 +28,14 @@ function wccf_render_meta_box_html() {
 	$meta_value = ! empty( $meta_value ) ? htmlspecialchars( wp_json_encode( $meta_value ) ) : '';
 	?>
 <div class='admin-wccf-wrapper'>
+	<div class='wccf-conditions'><?php echo wccf_field_conditions();?></div>
 	<div class='wccf-global-field-wrapper'></div>
 	<input id="wccf-fields" type='hidden' name='<?php echo esc_attr( WCCF_META_FIELD ); ?>' value="<?php echo esc_attr( $meta_value ); ?>"
 		type="text" />
 	<a class='button button-primary button-large wccf-add-field'
 		href='#'><?php echo esc_attr( __( 'Add new field', 'woocommerce-custom-fields' ) ); ?></a>
 		<input name='wccf_nonce' type='hidden' value='<?php echo esc_attr( wp_create_nonce( 'wccf-form-creator-nonce' ) ); ?>' />
-</div>
+</div> 
 	<?php
 }
 
@@ -42,12 +43,29 @@ function wccf_render_meta_box_html() {
  * Metabox save function
  */
 function wccf_save_meta_box() {
-	if ( empty( $_POST[ WCCF_META_FIELD ] ) ) {
-		return;
+
+	/**
+	 * Nonce is missing, stop with saving
+	 */
+	if ( ! isset( $_POST['wccf_nonce'] ) ) {
+		wccf_create_notice( 'Missing nonce.' );
+		return false;
 	}
-	$meta_value        = $_POST[ WCCF_META_FIELD ];
-	$meta_value_escape = preg_replace( '/\\\\/', '', $meta_value );
-	$meta_value_final  = JSON_DECODE( $meta_value_escape );
+
+	$nonce = sanitize_text_field( wp_unslash( $_POST['wccf_nonce'] ) );
+
+	if ( ! wp_verify_nonce( $nonce, 'wccf-form-creator-nonce' ) ) {
+		wccf_create_notice( 'Nonce is invalid.' );
+		return false;
+	}
+
+	if ( empty( $_POST[ WCCF_META_FIELD ] ) ) {
+		wccf_create_notice( 'No meta data.' );
+		return false;
+	}
+
+	$meta_value       = sanitize_text_field( wp_unslash( $_POST[ WCCF_META_FIELD ] ) );
+	$meta_value_final = JSON_DECODE( $meta_value );
 
 	// Data for field creator form.
 	update_post_meta( get_the_ID(), WCCF_META_FIELD, $meta_value_final );
@@ -73,11 +91,32 @@ function wccf_save_meta_box_wc_product( $field_configs ) {
 
 		// Create associative array of fields.
 		foreach ( $fields as $field ) {
-			$wccf_field_config['fields'][ $field->key ]['value'] = $field->value;
-		}
+			if ( isset( $field->options ) ) {
+				$wccf_field_config['fields'][ $field->key ]['value'] = wccf_create_woo_options( $field->options );
+				echo '<pre>';
+				print_r( $field );
+				echo '</pre>';
 
+			} else {
+				$wccf_field_config['fields'][ $field->key ]['value'] = $field->value;
+			}
+		}
 		array_push( $wccf_meta_wc_fields, $wccf_field_config );
 	}
-
 	update_post_meta( get_the_ID(), WCCF_META_WC_FIELD, $wccf_meta_wc_fields );
+}
+
+/**
+ * Converts objects to associative array
+ *
+ * @param array $options Array of options objects.
+ */
+function wccf_create_woo_options( $options ) {
+	$assoc_options = array();
+
+	foreach ( $options as $option ) {
+		$assoc_options[ $option->value ] = $option->text;
+	}
+
+	return $assoc_options;
 }

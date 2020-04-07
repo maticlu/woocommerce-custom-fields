@@ -21,7 +21,7 @@ class WCCF_Fields {
 	/**
 	 * Constructor
 	 */
-	private function __construct() {
+	public function __construct() {
 		$this->fields = self::get_fields();
 		$this->render_fields();
 	}
@@ -78,7 +78,7 @@ class WCCF_Fields {
 		);
 	}
 	/**
-	 * Fields : Textarea
+	 * Fields : Radio buttons
 	 *
 	 * @param array $field  Radio button data.
 	 */
@@ -86,8 +86,40 @@ class WCCF_Fields {
 		woocommerce_wp_radio(
 			array(
 				'id'        => $field['fields']['key']['value'],
-				'value'     => get_post_meta( get_the_ID(), $field['fields']['key']['value'], true ),
 				'label'     => $field['fields']['title']['value'],
+				'value'     => get_post_meta( get_the_ID(), $field['fields']['key']['value'], true ),
+				'data_type' => 'text',
+				'options'   => $field['fields']['options']['value'],
+			)
+		);
+	}
+	/**
+	 * Fields : Radio buttons
+	 *
+	 * @param array $field  Radio button data.
+	 */
+	private function render_field_dropdown( $field ) {
+		woocommerce_wp_select(
+			array(
+				'id'        => $field['fields']['key']['value'],
+				'label'     => $field['fields']['title']['value'],
+				'value'     => get_post_meta( get_the_ID(), $field['fields']['key']['value'], true ),
+				'data_type' => 'text',
+				'options'   => $field['fields']['options']['value'],
+			)
+		);
+	}
+	/**
+	 * Fields : Checkboxes
+	 *
+	 * @param array $field  Radio button data.
+	 */
+	private function render_field_checkbox( $field ) {
+		woocommerce_wp_checkbox(
+			array(
+				'id'        => $field['fields']['key']['value'],
+				'label'     => $field['fields']['title']['value'],
+				'value'     => get_post_meta( get_the_ID(), $field['fields']['key']['value'], true ),
 				'data_type' => 'text',
 			)
 		);
