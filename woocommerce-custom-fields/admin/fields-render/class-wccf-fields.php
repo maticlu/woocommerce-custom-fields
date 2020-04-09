@@ -1,8 +1,9 @@
 <?php
+
 /**
  * Woocommerce custom fields main field render class
  *
- * @package WooCommerceCustomFields/WCCF_Fields
+ * @package woocommerce-custom-fields/fields-render/wccf-fields
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -11,6 +12,7 @@ defined( 'ABSPATH' ) || exit;
  * Main WCCF class which renders all fields created in admin
  */
 class WCCF_Fields {
+
 	/**
 	 * All fields rendered in Woocommerce admin
 	 *
@@ -22,30 +24,50 @@ class WCCF_Fields {
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->fields = self::get_fields();
+		 $this->fields = self::get_fields();
 		$this->render_fields();
 	}
 	/**
 	 * Render fields on the right panels
 	 */
 	private function render_fields() {
-		foreach ( $this->fields as $field_panel => $fields ) {
-			add_action( 'woocommerce_product_options_' . $field_panel, array( $this, 'render_' . $field_panel ), 10 );
+		foreach ( $this->fields as $field_panel => $field_groups ) {
+			add_action(
+				'woocommerce_product_options_' . $field_panel,
+				function () use ( $field_groups, $field_panel ) {
+					$this->render( $field_groups, $field_panel );
+				},
+				10
+			);
 		}
 	}
-	/**
-	 * Renders pricing panel
-	 */
-	public function render_pricing() {
-		$field_groups = $this->fields['pricing'];
+	private function render( $field_groups ) {
 		foreach ( $field_groups as $field_group ) {
 			foreach ( $field_group as $field ) {
+				if ( ! $this->check_if_field_has_values( $field ) ) {
+					continue;
+				}
 				$function = 'render_field_' . $field['type'];
 				if ( method_exists( $this, $function ) ) {
 					$this->$function( $field );
-				}
+				} 
 			}
 		}
+	}
+	/**
+	 * Check if user entered values
+	 *
+	 * @param array $field
+	 */
+	public function check_if_field_has_values( $field ) {
+		if ( empty( $field['fields']['title']['value'] ) ) {
+			return false;
+		}
+		if ( empty( $field['fields']['key']['value'] ) ) {
+			return false;
+		}
+
+		return true;
 	}
 	/**
 	 * Fields : Textbox
@@ -68,14 +90,14 @@ class WCCF_Fields {
 	 * @param array $field  Textbox data.
 	 */
 	private function render_field_textarea( $field ) {
-		woocommerce_wp_textarea_input(
-			array(
-				'id'        => $field['fields']['key']['value'],
-				'value'     => get_post_meta( get_the_ID(), $field['fields']['key']['value'], true ),
-				'label'     => $field['fields']['title']['value'],
-				'data_type' => 'text',
-			)
-		);
+		// woocommerce_wp_textarea_input(
+		// array(
+		// 'id'        => $field['fields']['key']['value'],
+		// 'value'     => get_post_meta( get_the_ID(), $field['fields']['key']['value'], true ),
+		// 'label'     => $field['fields']['title']['value'],
+		// 'data_type' => 'text',
+		// )
+		// );
 	}
 	/**
 	 * Fields : Radio buttons
@@ -83,15 +105,15 @@ class WCCF_Fields {
 	 * @param array $field  Radio button data.
 	 */
 	private function render_field_radiobutton( $field ) {
-		woocommerce_wp_radio(
-			array(
-				'id'        => $field['fields']['key']['value'],
-				'label'     => $field['fields']['title']['value'],
-				'value'     => get_post_meta( get_the_ID(), $field['fields']['key']['value'], true ),
-				'data_type' => 'text',
-				'options'   => $field['fields']['options']['value'],
-			)
-		);
+		// woocommerce_wp_radio(
+		// array(
+		// 'id'        => $field['fields']['key']['value'],
+		// 'label'     => $field['fields']['title']['value'],
+		// 'value'     => get_post_meta( get_the_ID(), $field['fields']['key']['value'], true ),
+		// 'data_type' => 'text',
+		// 'options'   => $field['fields']['options']['value'],
+		// )
+		// );
 	}
 	/**
 	 * Fields : Radio buttons
@@ -99,15 +121,15 @@ class WCCF_Fields {
 	 * @param array $field  Radio button data.
 	 */
 	private function render_field_dropdown( $field ) {
-		woocommerce_wp_select(
-			array(
-				'id'        => $field['fields']['key']['value'],
-				'label'     => $field['fields']['title']['value'],
-				'value'     => get_post_meta( get_the_ID(), $field['fields']['key']['value'], true ),
-				'data_type' => 'text',
-				'options'   => $field['fields']['options']['value'],
-			)
-		);
+		// woocommerce_wp_select(
+		// array(
+		// 'id'        => $field['fields']['key']['value'],
+		// 'label'     => $field['fields']['title']['value'],
+		// 'value'     => get_post_meta( get_the_ID(), $field['fields']['key']['value'], true ),
+		// 'data_type' => 'text',
+		// 'options'   => $field['fields']['options']['value'],
+		// )
+		// );
 	}
 	/**
 	 * Fields : Checkboxes
@@ -128,7 +150,6 @@ class WCCF_Fields {
 	 * Get all fields from all Woocommerce Custom Field posts
 	 */
 	public static function get_fields() {
-
 		$fields = array();
 		$args   = array(
 			'post_type'      => WCCF_POSTTYPE,
@@ -144,7 +165,7 @@ class WCCF_Fields {
 		while ( $query->have_posts() ) {
 			$query->the_post();
 			$field_config = get_post_meta( get_the_ID(), WCCF_META_WC_FIELD, true );
-			$panel        = 'pricing';
+			$panel        = get_post_meta( get_the_ID(), 'wccf_fields_panel', true );
 			if ( empty( $fields[ $panel ] ) ) {
 				$fields[ $panel ] = array();
 			}

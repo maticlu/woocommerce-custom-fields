@@ -2,7 +2,7 @@
 /**
  * Basic WCCF post type created for users.
  *
- * @package WooCommerceCustomFields/PostTypeWCCField
+ * @package woocommerce-custom-fields/post-type-wccf-field
  */
 
 /**
@@ -20,6 +20,7 @@ function wcf_register_post_type() {
 			'public'      => false,
 			'has_archive' => false,
 			'show_ui'     => true,
+			'menu_icon'        => 'dashicons-list-view',
 			'supports'    => array( 'title' ),
 		)
 	);

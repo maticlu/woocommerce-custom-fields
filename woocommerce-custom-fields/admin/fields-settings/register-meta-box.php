@@ -2,7 +2,7 @@
 /**
  * Metaboxes that are placed inside WCCF Post Type
  *
- * @package WooCommerceCustomFields/PostTypeMetaboxes
+ * @package woocommerce-custom-fields/fields-settings/meta-boxes
  */
 
 /**
@@ -28,7 +28,8 @@ function wccf_render_meta_box_html() {
 	$meta_value = ! empty( $meta_value ) ? htmlspecialchars( wp_json_encode( $meta_value ) ) : '';
 	?>
 <div class='admin-wccf-wrapper'>
-	<div class='wccf-conditions'><?php echo wccf_field_conditions();?></div>
+	<div class='wccf-panels'><?php echo wccf_field_panels(); ?></div>
+	<div class='wccf-conditions'><?php echo wccf_field_conditions(); ?></div>
 	<div class='wccf-global-field-wrapper'></div>
 	<input id="wccf-fields" type='hidden' name='<?php echo esc_attr( WCCF_META_FIELD ); ?>' value="<?php echo esc_attr( $meta_value ); ?>"
 		type="text" />
@@ -53,6 +54,7 @@ function wccf_save_meta_box() {
 	}
 
 	$nonce = sanitize_text_field( wp_unslash( $_POST['wccf_nonce'] ) );
+	$panel = sanitize_text_field( wp_unslash( $_POST['wccf_fields_panel'] ) );
 
 	if ( ! wp_verify_nonce( $nonce, 'wccf-form-creator-nonce' ) ) {
 		wccf_create_notice( 'Nonce is invalid.' );
@@ -69,6 +71,9 @@ function wccf_save_meta_box() {
 
 	// Data for field creator form.
 	update_post_meta( get_the_ID(), WCCF_META_FIELD, $meta_value_final );
+
+	// Save Fields panel value.
+	update_post_meta( get_the_ID(), 'wccf_fields_panel', $panel );
 
 	// Data for displaying fields inside WC Product settings.
 	wccf_save_meta_box_wc_product( $meta_value_final );
@@ -92,11 +97,7 @@ function wccf_save_meta_box_wc_product( $field_configs ) {
 		// Create associative array of fields.
 		foreach ( $fields as $field ) {
 			if ( isset( $field->options ) ) {
-				$wccf_field_config['fields'][ $field->key ]['value'] = wccf_create_woo_options( $field->options );
-				echo '<pre>';
-				print_r( $field );
-				echo '</pre>';
-
+				$wccf_field_config['fields'][ $field->key ]['value'] = wccf_create_woo_options( $field->options ); 
 			} else {
 				$wccf_field_config['fields'][ $field->key ]['value'] = $field->value;
 			}

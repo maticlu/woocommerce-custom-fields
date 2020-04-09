@@ -2,7 +2,7 @@
 /**
  * Conditionally show fields.
  *
- * @package WooCommerceCustomFields/Conditions
+ * @package woocommerce-custom-fields/field-settings/conditions
  */
 
 /**
@@ -23,7 +23,8 @@ function wccf_field_conditions() {
  * Category conditions
  */
 function wccf_field_category_conditions() {
-	return '<select class="wccf-select-category" style="width:100%;"></select>';
+
+	// return '<select class="wccf-select-category" style="width:100%;"><option>Shirt</option></select>';
 }
 
 /**
@@ -36,7 +37,7 @@ function wccf_search_category() {
 	}
 
 	if ( ! isset( $_GET['q'] ) ) {
-		exit();
+		return array( 'result' => array() );
 	}
 
 	$nonce  = sanitize_text_field( wp_unslash( $_GET['nonce'] ) );
@@ -50,15 +51,21 @@ function wccf_search_category() {
 		array(
 			'taxonomy'   => 'product_cat',
 			'hide_empty' => false,
+			'name__like' => $search,
 		)
 	);
 
-	echo '<pre>';
-	print_r( $terms );
-	echo '</pre>';
+	$terms_format = array_map(
+		function( $term ) {
+			return array(
+				'id'   => $term->term_id,
+				'text' => $term->name,
+			);
+		},
+		$terms
+	);
 
-	echo $search;
-
+	echo wp_json_encode( array( 'results' => $terms_format ) );
 	exit();
 }
  add_action( 'wp_ajax_wccf_search_category', 'wccf_search_category' );

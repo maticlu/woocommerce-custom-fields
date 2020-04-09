@@ -2,7 +2,7 @@
 /**
  * Woocommerce custom fields Save class. This class gets all fields and save them into database using Woocommerce custom fields post types.
  *
- * @package WooCommerceCustomFields/WCCF_Save
+ * @package woocommerce-custom-fields/fields-render/wccf-fields-save
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Save all fields into database.
  */
-class WCCF_Save {
+class WCCF_Fields_Save {
 	/**
 	 * Current post id of Woocommerce Custom Fields post type
 	 *

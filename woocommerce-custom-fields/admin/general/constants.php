@@ -2,7 +2,7 @@
 /**
  * Description: Plugin constants
  *
- * @package WooCommerceCustomFields/Constants
+ * @package woocommerce-custom-fields/general/constants
  */
 
 define( 'WCCF_POSTTYPE', 'wcc-fields' );

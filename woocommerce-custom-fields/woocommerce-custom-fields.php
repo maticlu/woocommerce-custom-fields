@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Plugin Name: WooCommerce Custom Fields
  * Plugin URI: https://woocommerce-custom-fields.evaqode.com/
@@ -26,26 +27,26 @@ add_action(
 		if ( is_woocommerce_activated() ) {
 
 			/**  Different constants */
-			require_once 'admin/constants.php';
+			require_once 'admin/general/constants.php';
+			require_once 'admin/general/functions.php';
+			require_once 'admin/general/register-admin-assets.php';
+			require_once 'admin/general/register-post-type.php';
 
-			/** General functions -> Helpers */
-			require_once 'admin/general-functions.php';
-			require_once 'admin/wccf-notices.php';
+			require_once 'admin/fields-settings/wccf-notices.php';
+			require_once 'admin/fields-settings/wccf-conditions.php';
+			require_once 'admin/fields-settings/wccf-panels.php';
+			require_once 'admin/fields-settings/register-meta-box.php';
 
-			/** Register */
-			require_once 'admin/register-admin-assets.php';
-			require_once 'admin/register-options-page.php';
-			require_once 'admin/register-post-type.php';
-			require_once 'admin/admin-fields/register-meta-box.php';
-			require_once 'admin/admin-fields/product-data-tabs.php';
-			require_once 'admin/wccf-conditions.php';
+			require_once 'admin/fields-render/class-wccf-fields-save.php';
+			require_once 'admin/fields-render/class-wccf-fields.php';
+			require_once 'admin/fields-render/register-woocommerce-fields.php';
 
-			/** Register fields on Woocommerce product page */
-			require_once 'admin/class-wccf-fields.php';
-			require_once 'admin/class-wccf-save.php';
-			require_once 'admin/register-woocommerce-fields.php';
+			require_once 'admin/tabs-render/product-data-tabs.php';
+			require_once 'admin/tabs-render/register-panel-options.php';
 
-			/** Register Custom Post Type */
+			// /** Register fields on Woocommerce product page */
+
+			// /** Register Custom Post Type */
 			wcf_register_post_type();
 		}
 	}

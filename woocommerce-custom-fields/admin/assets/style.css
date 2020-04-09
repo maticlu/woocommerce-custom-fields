@@ -118,5 +118,8 @@
 /** OPTIONS PAGE **/
 
 .wccf-panels-wrapper {
-	margin: 1em 0;
+	margin-bottom:1em;
+}
+.wccf-panels-remove{
+	margin-left:1em;
 }

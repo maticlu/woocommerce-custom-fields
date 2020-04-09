@@ -1,8 +1,8 @@
 <?php
 /**
- * Metaboxes that are placed inside WCCF Post Type
+ * Notices for field settings page
  *
- * @package WooCommerceCustomFields/Notices
+ * @package woocommerce-custom-fields/field-settings/notices
  */
 
 /**
@@ -36,7 +36,3 @@ function wccf_error_messages() {
 	}
 }
 add_action( 'admin_notices', 'wccf_error_messages' );
-
-/**
- * Validate WCCF nonce
- */

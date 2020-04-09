@@ -526,22 +526,7 @@
     newField.id = field.id;
     return newField;
   }
-
-  function wccfCreateSlug( string ) {
-    var match;
-    if ( 'string' != typeof string ) {
-      return false;
-    }
-    match = string.match( /[A-Za-z0-9\s]/g );
-    if ( null === match ) {
-      return '';
-    }
-    return match
-      .join( '' )
-      .replace( /\s/g, '_' )
-      .toLowerCase();
-  }
-
+  
   function wccfCopyObject( object ) {
     return JSON.parse( JSON.stringify( object ) );
   }
