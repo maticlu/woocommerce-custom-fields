@@ -1,6 +1,6 @@
 <?php
 /**
- * Textbox class implements interface field
+ * Textarea class implements interface field
  *
  * @package WooCommerceCustomFields/InterfaceField
  */
@@ -8,14 +8,14 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Render textbox class
+ * Render textarea element
  */
-class WCCF_Field_Textbox extends WCCF_Field {
+class WCCF_Field_Textarea extends WCCF_Field {
 	/**
 	 * Render field.
 	 */
 	public function render_field() {
-		woocommerce_wp_text_input(
+		woocommerce_wp_textarea_input(
 			array(
 				'id'          => $this->field['fields']['key']['value'],
 				'value'       => get_post_meta( get_the_ID(), $this->field['fields']['key']['value'], true ),

@@ -25,4 +25,3 @@ function wcf_register_post_type() {
 		)
 	);
 }
-// TODO - icon design.

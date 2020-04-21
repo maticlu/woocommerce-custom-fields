@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Plugin Name: WooCommerce Custom Fields
  * Plugin URI: https://woocommerce-custom-fields.evaqode.com/
@@ -43,8 +42,15 @@ add_action(
 
 			require_once 'admin/tabs-render/product-data-tabs.php';
 			require_once 'admin/tabs-render/register-panel-options.php';
+			require_once 'admin/tabs-render/icon-list.php';
 
-			// /** Register fields on Woocommerce product page */
+			/** Fields */
+			require_once 'admin/fields-render/fields/class-wccf-field.php';
+			require_once 'admin/fields-render/fields/class-wccf-field-textbox.php';
+			require_once 'admin/fields-render/fields/class-wccf-field-checkbox.php';
+			require_once 'admin/fields-render/fields/class-wccf-field-radio.php';
+			require_once 'admin/fields-render/fields/class-wccf-field-dropdown.php';
+			require_once 'admin/fields-render/fields/class-wccf-field-textarea.php';
 
 			// /** Register Custom Post Type */
 			wcf_register_post_type();

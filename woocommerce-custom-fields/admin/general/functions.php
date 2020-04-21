@@ -12,7 +12,6 @@ function wccf_capability() {
 
 /**  Change here capability who can use this plugin */
 function wccf_forbidden_woocommerce_tabs() {
-	// TODO - keys are wrong. Get the right values!
 	return array(
 		'pricing'                => 'General',
 		'inventory_product_data' => 'Inventory',

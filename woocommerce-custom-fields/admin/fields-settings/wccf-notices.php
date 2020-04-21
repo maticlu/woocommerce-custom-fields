@@ -5,6 +5,8 @@
  * @package woocommerce-custom-fields/field-settings/notices
  */
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Create backend notice while saving WCCF field
  *
@@ -25,7 +27,7 @@ function wccf_create_notice( string $error ) {
  */
 function wccf_error_messages() {
 	if ( isset( $_GET['wccf-error'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
-		$error = wp_unslash( $_GET['wccf-error'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, phpcs:ignore WordPress.Security.NonceVerification
+		$error = sanitize_text_field( wp_unslash( $_GET['wccf-error'] ) ); // phpcs:ignore WordPress.Security.NonceVerification
 		?>
 			<div class='error'>
 				<p>

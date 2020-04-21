@@ -14,10 +14,11 @@ function wccf_product_data_tabs( $woocommerce_product_data_tabs ) {
 	$tabs = get_option( WCCF_PANELS );
 	foreach ( $tabs as $tab ) {
 		$tab_id = wccf_tab_id( $tab['key'] );
+		$icon   = wccf_get_icon_from_classes( $tab );
 		$woocommerce_product_data_tabs[ sanitize_title( $tab['key'] ) ] = array(
 			'label'    => $tab['value'],
 			'target'   => $tab_id,
-			'class'    => array('wccf_tab'),
+			'class'    => array( 'wccf_tab', $icon ),
 			'priority' => 1000,
 		);
 	};
@@ -51,4 +52,19 @@ add_action( 'woocommerce_product_data_panels', 'wccf_add_custom_panels', 10 );
  */
 function wccf_tab_id( $tabname ) {
 	return 'wccf_' . sanitize_title( $tabname );
+}
+
+/**
+ * Get icon from Classes. Database stores classes, this functions gets icon class.
+ *
+ * @param array $tab All tab information stored in array.
+ */
+function wccf_get_icon_from_classes( $tab ) {
+	if ( empty( $tab['icon'] ) ) {
+		return '';
+	}
+
+	preg_match( '/icon-.*\s/', $tab['icon'], $icon );
+
+	return count( $icon ) ? $icon[0] : '';
 }

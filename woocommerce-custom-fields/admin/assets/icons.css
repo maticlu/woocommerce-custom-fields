@@ -1,0 +1,272 @@
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-virtual a::before, .wccf-icon.icon-virtual::before{
+	content:"\e000";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-downloadable a::before, .wccf-icon.icon-downloadable::before{
+	content:"\e001";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-grouped a::before, .wccf-icon.icon-grouped::before{
+	content:"\e002";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-variable a::before, .wccf-icon.icon-variable::before{
+	content:"\e003";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-contract a::before, .wccf-icon.icon-contract::before{
+	content:"\e004";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-expand a::before, .wccf-icon.icon-expand::before{
+	content:"\e005";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-simple a::before, .wccf-icon.icon-simple::before{
+	content:"\e006";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-plus a::before, .wccf-icon.icon-plus::before{
+	content:"\e007";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-right a::before, .wccf-icon.icon-right::before{
+	content:"\e008";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-up a::before, .wccf-icon.icon-up::before{
+	content:"\e009";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-down a::before, .wccf-icon.icon-down::before{
+	content:"\e00a";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-left a::before, .wccf-icon.icon-left::before{
+	content:"\e00b";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-image a::before, .wccf-icon.icon-image::before{
+	content:"\e00c";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-link a::before, .wccf-icon.icon-link::before{
+	content:"\e00d";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-calendar a::before, .wccf-icon.icon-calendar::before{
+	content:"\e00e";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-processing a::before, .wccf-icon.icon-processing::before{
+	content:"\e00f";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-view a::before, .wccf-icon.icon-view::before{
+	content:"\e010";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-status-processing a::before, .wccf-icon.icon-status-processing::before{
+	content:"\e011";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-status-pending a::before, .wccf-icon.icon-status-pending::before{
+	content:"\e012";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-status-cancelled a::before, .wccf-icon.icon-status-cancelled::before{
+	content:"\e013";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-status-refunded a::before, .wccf-icon.icon-status-refunded::before{
+	content:"\e014";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-status-completed a::before, .wccf-icon.icon-status-completed::before{
+	content:"\e015";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-status-failed a::before, .wccf-icon.icon-status-failed::before{
+	content:"\e016";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-check a::before, .wccf-icon.icon-check::before{
+	content:"\e017";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-query a::before, .wccf-icon.icon-query::before{
+	content:"\e018";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-truck-1 a::before, .wccf-icon.icon-truck-1::before{
+	content:"\e019";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-truck-2 a::before, .wccf-icon.icon-truck-2::before{
+	content:"\e01a";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-globe a::before, .wccf-icon.icon-globe::before{
+	content:"\e01b";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-gear a::before, .wccf-icon.icon-gear::before{
+	content:"\e01c";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-cart a::before, .wccf-icon.icon-cart::before{
+	content:"\e01d";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-card a::before, .wccf-icon.icon-card::before{
+	content:"\e01e";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-stats a::before, .wccf-icon.icon-stats::before{
+	content:"\e01f";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-star-full a::before, .wccf-icon.icon-star-full::before{
+	content:"\e020";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-star-empty a::before, .wccf-icon.icon-star-empty::before{
+	content:"\e021";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-up-down a::before, .wccf-icon.icon-up-down::before{
+	content:"\e022";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-reports a::before, .wccf-icon.icon-reports::before{
+	content:"\e023";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-search a::before, .wccf-icon.icon-search::before{
+	content:"\e024";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-search-2 a::before, .wccf-icon.icon-search-2::before{
+	content:"\e025";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-user2 a::before, .wccf-icon.icon-user2::before{
+	content:"\e026";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-windows a::before, .wccf-icon.icon-windows::before{
+	content:"\e027";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-note a::before, .wccf-icon.icon-note::before{
+	content:"\e028";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-east a::before, .wccf-icon.icon-east::before{
+	content:"\e029";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-north a::before, .wccf-icon.icon-north::before{
+	content:"\e02a";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-attributes a::before, .wccf-icon.icon-attributes::before{
+	content:"\e02b";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-inventory a::before, .wccf-icon.icon-inventory::before{
+	content:"\e02c";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-mail a::before, .wccf-icon.icon-mail::before{
+	content:"\e02d";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-south a::before, .wccf-icon.icon-south::before{
+	content:"\e02e";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-west a::before, .wccf-icon.icon-west::before{
+	content:"\e02f";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-share a::before, .wccf-icon.icon-share::before{
+	content:"\e030";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-refresh a::before, .wccf-icon.icon-refresh::before{
+	content:"\e031";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-navigation a::before, .wccf-icon.icon-navigation::before{
+	content:"\e032";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-on-hold a::before, .wccf-icon.icon-on-hold::before{
+	content:"\e033";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-external a::before, .wccf-icon.icon-external::before{
+	content:"\e034";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-expand-2 a::before, .wccf-icon.icon-expand-2::before{
+	content:"\e035";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-contract-2 a::before, .wccf-icon.icon-contract-2::before{
+	content:"\e036";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-phone a::before, .wccf-icon.icon-phone::before{
+	content:"\e037";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-user a::before, .wccf-icon.icon-user::before{
+	content:"\e038";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-status a::before, .wccf-icon.icon-status::before{
+	content:"\e039";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-user-fill a::before, .wccf-icon.icon-user-fill::before{
+	content:"\e03a";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-phone-fill a::before, .wccf-icon.icon-phone-fill::before{
+	content:"\e03b";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-status-fill a::before, .wccf-icon.icon-status-fill::before{
+	content:"\e03c";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-woo a::before, .wccf-icon.icon-woo::before{
+	content:"\e03d";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-coupon a::before, .wccf-icon.icon-coupon::before{
+	content:"\e600";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-limit a::before, .wccf-icon.icon-limit::before{
+	content:"\e601";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-restricted a::before, .wccf-icon.icon-restricted::before{
+	content:"\e602";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-edit a::before, .wccf-icon.icon-edit::before{
+	content:"\e603";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-ccv a::before, .wccf-icon.icon-ccv::before{
+	content:"\e604";
+	font-family:"Woocommerce";
+}
+#woocommerce-product-data ul.wc-tabs .wccf_tab.icon-storefront a::before, .wccf-icon.icon-storefront::before{
+	content:"\e900";
+	font-family:"Woocommerce";
+}

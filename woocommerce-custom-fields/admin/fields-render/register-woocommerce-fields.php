@@ -11,12 +11,12 @@ defined( 'ABSPATH' ) || exit;
  * Render Fields
  */
 function wccf_register_wc_fields() {
-	if ( ! isset( $_GET['post'] ) ) {
+	if ( ! isset( $_GET['post'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
 		return false;
 	}
-	$post_id = $_GET['post'];
+	$post_id = sanitize_text_field( wp_unslash( $_GET['post'] ) ); // phpcs:ignore WordPress.Security.NonceVerification
 	if ( get_post_type( $post_id ) === 'product' ) {
-		new WCCF_Fields();
+		new WCCF_Fields( $post_id );
 	}
 }
 add_action( 'admin_init', 'wccf_register_wc_fields' );

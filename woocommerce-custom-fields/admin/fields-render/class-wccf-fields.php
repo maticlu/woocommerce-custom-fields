@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Woocommerce custom fields main field render class
  *
@@ -22,9 +21,11 @@ class WCCF_Fields {
 
 	/**
 	 * Constructor
+	 *
+	 * @param number $post_id Current product id.
 	 */
-	public function __construct() {
-		 $this->fields = self::get_fields();
+	public function __construct( $post_id ) {
+		$this->fields = self::get_fields( $post_id );
 		$this->render_fields();
 	}
 	/**
@@ -41,33 +42,20 @@ class WCCF_Fields {
 			);
 		}
 	}
+	/**
+	 * Current panel render
+	 *
+	 * @param array $field_groups Group of fields.
+	 */
 	private function render( $field_groups ) {
 		foreach ( $field_groups as $field_group ) {
 			foreach ( $field_group as $field ) {
-				if ( ! $this->check_if_field_has_values( $field ) ) {
-					continue;
-				}
 				$function = 'render_field_' . $field['type'];
 				if ( method_exists( $this, $function ) ) {
 					$this->$function( $field );
-				} 
+				}
 			}
 		}
-	}
-	/**
-	 * Check if user entered values
-	 *
-	 * @param array $field
-	 */
-	public function check_if_field_has_values( $field ) {
-		if ( empty( $field['fields']['title']['value'] ) ) {
-			return false;
-		}
-		if ( empty( $field['fields']['key']['value'] ) ) {
-			return false;
-		}
-
-		return true;
 	}
 	/**
 	 * Fields : Textbox
@@ -75,14 +63,9 @@ class WCCF_Fields {
 	 * @param array $field  Textbox data.
 	 */
 	private function render_field_textbox( $field ) {
-		woocommerce_wp_text_input(
-			array(
-				'id'        => $field['fields']['key']['value'],
-				'value'     => get_post_meta( get_the_ID(), $field['fields']['key']['value'], true ),
-				'label'     => $field['fields']['title']['value'],
-				'data_type' => 'text',
-			)
-		);
+		$input = new WCCF_Field_Textbox( $field );
+		$input->render();
+
 	}
 	/**
 	 * Fields : Textarea
@@ -90,14 +73,8 @@ class WCCF_Fields {
 	 * @param array $field  Textbox data.
 	 */
 	private function render_field_textarea( $field ) {
-		// woocommerce_wp_textarea_input(
-		// array(
-		// 'id'        => $field['fields']['key']['value'],
-		// 'value'     => get_post_meta( get_the_ID(), $field['fields']['key']['value'], true ),
-		// 'label'     => $field['fields']['title']['value'],
-		// 'data_type' => 'text',
-		// )
-		// );
+		$input = new WCCF_Field_Textarea( $field );
+		$input->render();
 	}
 	/**
 	 * Fields : Radio buttons
@@ -105,15 +82,8 @@ class WCCF_Fields {
 	 * @param array $field  Radio button data.
 	 */
 	private function render_field_radiobutton( $field ) {
-		// woocommerce_wp_radio(
-		// array(
-		// 'id'        => $field['fields']['key']['value'],
-		// 'label'     => $field['fields']['title']['value'],
-		// 'value'     => get_post_meta( get_the_ID(), $field['fields']['key']['value'], true ),
-		// 'data_type' => 'text',
-		// 'options'   => $field['fields']['options']['value'],
-		// )
-		// );
+		$input = new WCCF_Field_Radio( $field );
+		$input->render();
 	}
 	/**
 	 * Fields : Radio buttons
@@ -121,15 +91,8 @@ class WCCF_Fields {
 	 * @param array $field  Radio button data.
 	 */
 	private function render_field_dropdown( $field ) {
-		// woocommerce_wp_select(
-		// array(
-		// 'id'        => $field['fields']['key']['value'],
-		// 'label'     => $field['fields']['title']['value'],
-		// 'value'     => get_post_meta( get_the_ID(), $field['fields']['key']['value'], true ),
-		// 'data_type' => 'text',
-		// 'options'   => $field['fields']['options']['value'],
-		// )
-		// );
+		$input = new WCCF_Field_Dropdown( $field );
+		$input->render();
 	}
 	/**
 	 * Fields : Checkboxes
@@ -137,19 +100,15 @@ class WCCF_Fields {
 	 * @param array $field  Radio button data.
 	 */
 	private function render_field_checkbox( $field ) {
-		woocommerce_wp_checkbox(
-			array(
-				'id'        => $field['fields']['key']['value'],
-				'label'     => $field['fields']['title']['value'],
-				'value'     => get_post_meta( get_the_ID(), $field['fields']['key']['value'], true ),
-				'data_type' => 'text',
-			)
-		);
+		$input = new WCCF_Field_Checkbox( $field );
+		$input->render();
 	}
 	/**
 	 * Get all fields from all Woocommerce Custom Field posts
+	 *
+	 * @param number $product_id Current product id.
 	 */
-	public static function get_fields() {
+	public static function get_fields( $product_id ) {
 		$fields = array();
 		$args   = array(
 			'post_type'      => WCCF_POSTTYPE,
@@ -165,26 +124,62 @@ class WCCF_Fields {
 		while ( $query->have_posts() ) {
 			$query->the_post();
 			$field_config = get_post_meta( get_the_ID(), WCCF_META_WC_FIELD, true );
-			$panel        = get_post_meta( get_the_ID(), 'wccf_fields_panel', true );
+			$panel        = get_post_meta( get_the_ID(), WCCF_FIELDS_PANEL, true );
+			$conditions   = get_post_meta( get_the_ID(), WCCF_FIELDS_INCLUDE_EXCLUDE, true );
 			if ( empty( $fields[ $panel ] ) ) {
 				$fields[ $panel ] = array();
 			}
 
-			array_push( $fields[ $panel ], $field_config );
+			if ( self::fieldgroup_passed_condition_check( $conditions, $product_id ) ) {
+				array_push( $fields[ $panel ], $field_config );
+			};
 		}
 
 		wp_reset_postdata();
 
 		return $fields;
 	}
-}
-/**
- * Helper function, dumps content on popup
- *
- * @param any $content Anything.
- */
-function print_admin( $content ) {
-	echo '<pre style="position:fixed;left:0;top:0;width:100%;height:80vh;z-index:1000000000;overflow:scroll;background:white;">';
-	print_r( $content );
-	echo '</pre>';
+
+	/**
+	 * Checks if fields can be rendered for current product.
+	 *
+	 * @param array  $conditions Array of include, exclude conditions.
+	 * @param number $product_id Current product id.
+	 */
+	private static function fieldgroup_passed_condition_check( $conditions, $product_id ) {
+		if ( empty( $conditions['radio_button'] ) ) {
+			return true;
+		}
+
+		if ( 'none' === $conditions['radio_button'] ) {
+			return true;
+		}
+
+		$condition_categories = $conditions[ $conditions['radio_button'] ];
+
+		if ( empty( $condition_categories ) ) {
+			return true;
+		}
+
+		$product_categories = wp_get_post_terms( $product_id, 'product_cat' );
+
+		$product_category_ids = array_map(
+			function( $product_category ) {
+				return $product_category->term_id;
+			},
+			$product_categories
+		);
+
+		$intersect = array_intersect( $condition_categories, $product_category_ids );
+
+		if ( 'exclude' === $conditions['radio_button'] && ! count( $intersect ) ) {
+			return true;
+		}
+
+		if ( 'include' === $conditions['radio_button'] && count( $intersect ) ) {
+			return true;
+		}
+
+		return false;
+	}
 }

@@ -25,12 +25,12 @@ class WCCF_Fields_Save {
 	 */
 	public function __construct( $post_id ) {
 		$this->post_id = $post_id;
-		$this->panels  = WCCF_Fields::get_fields();
+		$this->panels  = WCCF_Fields::get_fields( $post_id );
 		$this->start();
 	}
 
 	/**
-	 * Loop through panels and field grousp to get to fields. Then Call save_field.
+	 * Loop through panels and field groups to get to fields. Then Call save_field.
 	 */
 	private function start() {
 		foreach ( $this->panels as $panel ) {
@@ -50,7 +50,7 @@ class WCCF_Fields_Save {
 	private function save_field( $field ) {
 		$meta_key = $field['fields']['key']['value'];
 		if ( ! empty( $_POST[ $meta_key ] ) ) {
-			$meta_value = $_POST[ $meta_key ];
+			$meta_value = sanitize_text_field( wp_unslash( $_POST[ $meta_key ] ) );
 			update_post_meta( $this->post_id, $meta_key, $meta_value );
 		}
 	}

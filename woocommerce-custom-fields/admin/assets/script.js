@@ -18,11 +18,8 @@
   var descriptions = {
     title: 'Main field label',
     key: 'Key is unique ID for fields. Be careful when creating keys. Duplicate keys will cause problems.',
+    description: 'Description will guide user how to fill this input',
     options: 'Write field options in key value pairs seperated by : . Each key value pair should be in new line.'
-  };
-
-  var messages = {
-    noFields: 'Click Add new field button to create new Woocommerce field configuration.'
   };
 
   // Available html fields for Woocommerce
@@ -43,6 +40,13 @@
         key: 'key',
         value: '',
         description: descriptions.key
+      },
+      {
+        type: 'text',
+        name: 'Description',
+        key: 'description',
+        value: '',
+        description: descriptions.description
       }
     ]
   };
@@ -64,6 +68,13 @@
         key: 'key',
         value: '',
         description: descriptions.key
+      },
+      {
+        type: 'text',
+        name: 'Description',
+        key: 'description',
+        value: '',
+        description: descriptions.description
       }
     ]
   };
@@ -85,6 +96,13 @@
         key: 'key',
         value: '',
         description: descriptions.key
+      },
+      {
+        type: 'text',
+        name: 'Description',
+        key: 'description',
+        value: '',
+        description: descriptions.description
       },
       {
         type: 'options',
@@ -154,7 +172,7 @@
     textarea: fieldTextarea,
     radiobutton: fieldRadiobuttons,
     checkbox: fieldCheckboxes,
-    dropdown : fieldDropdown
+    dropdown: fieldDropdown
   };
 
   // This is our main object, which rerenders evertytime we make a change.
@@ -297,6 +315,7 @@
     render: function() {
       var i;
       var content;
+      var messages = $( '.wccf-message' );
       $( this.wrapper ).empty();
       if ( this.fields.length ) {
         for ( i in this.fields ) {
@@ -304,7 +323,7 @@
           $( this.wrapper ).append( content );
         }
       } else {
-        $( this.wrapper ).append( '<div class="wccf-message wcc-postbox-border wccf-vertical-space">' + messages.noFields + '</div>' );
+        messages.show();
       }
       this.syncWithInput();
     },
@@ -349,7 +368,6 @@
       var $functionName;
       for ( i in fields ) {
         currentField = fields[i];
-        console.log( currentField );
         $functionName = 'renderField' + capitalizeString( currentField.type );
 
         try {
@@ -433,6 +451,7 @@
   };
 
   wccfConditions();
+  wccfConditionsToggle();
   wccfFieldEvents();
   wccfReactiveForm.read();
 
@@ -526,7 +545,7 @@
     newField.id = field.id;
     return newField;
   }
-  
+
   function wccfCopyObject( object ) {
     return JSON.parse( JSON.stringify( object ) );
   }
@@ -554,20 +573,29 @@
   }
 
   // Conditions
-  function wccfConditions(){
-    $(".wccf-select-category").select2({
+  function wccfConditions() {
+    $( '.wccf-select-category' ).select2({
       ajax: {
         url: ajaxurl,
         dataType: 'json',
-        data: function (params) {
+        data: function( params ) {
           return {
             q: params.term, // search term
             action: 'wccf_search_category',
-            nonce:$("input[name='wccf_nonce']").val()
+            nonce: $( 'input[name="wccf_nonce"]' ).val()
           };
-        },
-        // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+        }
       }
+    });
+  }
+
+  //Toggle wccfConditions
+  function wccfConditionsToggle() {
+    $( 'input[type="radio"][name="incex"]' ).on( 'change', function() {
+        var radioValue = $( this ).val();
+        var wccfToggleCondition = $( '.wccf-toggle-condition' );
+        wccfToggleCondition.addClass( 'hidden' );
+        $( 'div[data-show="wccf-' + radioValue + '"]' ).removeClass( 'hidden' );
     });
   }
 
